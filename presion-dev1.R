@@ -6,6 +6,14 @@ library(formattable)
 
 # Define the UI
 ui <- fluidPage(
+  tags$head(
+    tags$style(HTML(
+      ".titlePanel { background-color: #63B8FF; padding: 10px; text-align: center; } \
+       .titlePanel h1 { color: white; font-weight: bold; margin: 0; } \
+       .sidebarPanel { background-color: #63B8FF; color: white; padding: 15px; border-radius: 5px; } \
+       .sidebarPanel input, .sidebarPanel button { margin-bottom: 10px; }"
+    ))
+  ),
   titlePanel("Seguimiento de Presión Arterial"),
   sidebarLayout(
     sidebarPanel(
@@ -66,15 +74,15 @@ server <- function(input, output, session) {
     if (nrow(plot_data) == 0) return(NULL)
     
     ggplot(plot_data, aes(x = Fecha)) +
-      geom_line(aes(y = Sistólica, color = "Sistólica"), size = 1) +
-      geom_line(aes(y = Diastólica, color = "Diastólica"), size = 1) +
-      geom_ribbon(aes(ymin = 120, ymax = 140), fill = "#F7AD19", alpha = 0.2) +
-      geom_ribbon(aes(ymin = 80, ymax = 90), fill = "#429EBD", alpha = 0.2) +
-      labs(title = "Seguimiento de Presión Arterial",
-           x = "Fecha",
-           y = "Presión (mmHg)") +
-      scale_color_manual(values = c("Sistólica" = "#4682B4", "Diastólica" = "#228B22")) +
-      theme_minimal()
+      geom_line(aes(y = Sistólica, color = "Sistólica"), size = 2 +
+      geom_line(aes(y = Diastólica, color = "Diastólica"), size = 2) +
+      geom_ribbon(aes(ymin = 120, ymax = 140), fill = "#429EBD", alpha = 0.2) +
+      geom_ribbon(aes(ymin = 80, ymax = 90), fill = "#F7AD19", alpha = 0.2) +
+      # labs(title = "Seguimiento de Presión Arterial",
+      #      x = "Fecha",
+      #      y = "Presión (mmHg)") +
+      # scale_color_manual(values = c("Sistólica" = "#F7AD19", "Diastólica" = "#429EBD")) +
+       theme_minimal()
   })
   
   # Render the formatted data table
@@ -137,4 +145,3 @@ server <- function(input, output, session) {
 
 # Run the application
 shinyApp(ui = ui, server = server)
-
