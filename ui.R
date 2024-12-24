@@ -28,12 +28,13 @@ ui <- fluidPage(
       downloadButton("download", "Descargar Datos")
     ),
     mainPanel(
-      plotOutput("pressurePlot"),
-      uiOutput("formattedTable"),
       fluidRow(
         column(6, uiOutput("customSystolicBox")),
         column(6, uiOutput("customDiastolicBox"))
-      )
+      ),
+      plotOutput("pressurePlot"),
+      uiOutput("formattedTable")
+
     )
   )
 )
