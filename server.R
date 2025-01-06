@@ -1,7 +1,7 @@
 ## server.R
 server <- function(input, output, session) {
   # File path for saving data
-  file_path <- "presion-daniel.csv"
+  file_path <- "presion.csv"
   
   # Reactive data storage
   data <- reactiveVal({
